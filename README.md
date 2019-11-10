@@ -1,9 +1,23 @@
-Program SEARCH version 6.0 by Baptiste Thémine
+# SEARCH 6.0
 
-Windows command line utility that performs file search, text search and file/folder comparison.
-Compatible with Windows XP, Vista, 7, 8, 8.1, 10 english and french.
+README : [English](#search-help-en-uk), [French](#search-help-fr-fr).
+
+OS Support : Windows XP, Vista, 7, 8, 8.1, 10 english and french.
+
+--------------------------------------------------------------------------------
+
+### SEARCH HELP EN :uk:
+
+**Windows command line utility that performs file search, text search and file/folder comparison.**
+
 The file search.bat can be placed into folder "C:\Windows" and be executed on CMD or PowerShell.
+The utility executes commands DIR, FIND, FINDSTR and FC on the computer file tree
+in read only by default, i.e. without any alteration or deletion of personal data.
+Therefore, changing command line option must be treated with caution.
+Only a temporary file created in the folder specified by %TEMP% variable is used during
+directory comparison.
 
+```
 The syntax of this command is :
 
 SEARCH HELP					Display help
@@ -11,14 +25,6 @@ SEARCH FILE [files...] [options]		File search
 SEARCH TEXT "string" [files...] [options]	Text search
 SEARCH COMP file1 file2 [options]		File comparison
 SEARCH ... [/CMD[ONLY] "cmdline"]		Command line option
-
-Note : The utility executes commands DIR, FIND, FINDSTR and FC on the computer file tree
-in read only by default, i.e. without any alteration or deletion of personal data.
-Therefore, changing command line option must be treated with caution.
-Only a temporary file created in the folder specified by %TEMP% variable is used during
-directory comparison.
-
-Please find below English detailed help and examples of use :
 
 SEARCH FILE [directory | files...] [options]
 
@@ -54,7 +60,7 @@ SEARCH FILE [directory | files...] [options]
  Displays all files inside the current directory and all subdirectories.
 
  SEARCH FILE %TEMP%
- Displays all elements inside the Window temporary folder.
+ Displays all elements inside the Window temporary directory.
 
  SEARCH FILE "test" "a file name" .txt
  Searches for text files and files with a name containing the strings "test" or
@@ -71,7 +77,6 @@ SEARCH FILE [directory | files...] [options]
 
  SEARCH FILE /DATE 12/12/2012-%DATE% /T:C
  Searches for all elements created between the 12th of december 2012 and today.
-
 
 SEARCH TEXT "string" [directory | files...] [options]
 
@@ -109,8 +114,8 @@ SEARCH TEXT "string" [directory | files...] [options]
  matching lines.
 
  SEARCH TEXT "Hello world" /DIR "test" /NAME .txt /M /X
- Searches for text files inside the folder "test" which contains a whole line
- "Hello world" but doesn't display them.
+ Searches for text files inside the directory "test" which contains a whole
+ line "Hello world" but doesn't display them.
 
  SEARCH TEXT "Hello world" .txt .bat /FINDSTR /B /I /L
  Searches for text and batch files containing the strings "Hello" or "world" at
@@ -125,7 +130,6 @@ SEARCH TEXT "string" [directory | files...] [options]
 
  SEARCH TEXT . /C /M /R
  Displays the count of non empty lines inside each file.
-
 
 SEARCH COMP file1 file2 [options]
             directory1 directory2 [options]
@@ -164,22 +168,20 @@ SEARCH COMP file1 file2 [options]
  displays the result in abbreviated format.
 
  SEARCH COMP test1\*.txt test2\*txt
- Does an ASCII comparison between text files two by two inside the two folders
- "test1" and "test2". The compared files must have the same name inside the two
- folders.
+ Does an ASCII comparison between text files two by two inside the two
+ directories "test1" and "test2". The compared files must have the same name
+ inside the two directories.
 
  SEARCH COMP test1 test2 /A:-D /S
- Searches for all file differencies between the two folders "test1" and "test2"
- and all subdirectories.
+ Searches for all file differencies between the two directories "test1" and
+ "test2" and all subdirectories.
 
  SEARCH COMP test1 test2 /V /CMD "echo @fname"
- Searches for all file names which are both inside the folder "test1" and the
- folder "test2".
+ Searches for all homonymous files of the directories "test1" and "test2".
 
  SEARCH COMP test1 test2 /NAME .bat /T:C /CMD "echo @fdate @ftime @frelp"
  Searches for batch files which have different creation date/time inside the
- two folders "test1" and "test2".
-
+ two directories "test1" and "test2".
 
 Command line option reference :
 
@@ -188,7 +190,7 @@ Command line option reference :
  /CMD allows to redirect search result to a specified command line. "cmdline"
  is the command line to execute for each found files by file search or text
  search and defines also criteria for comparing two directories. If /CMDONLY is
- specified, only the specified commmand line output will be displayed.
+ specified, the search report detailed output is disabled.
  The default command line is "echo @fattr @fdate @ftime @fsize@tab@fpath".
 
  The following variables can be used in the command string :
@@ -197,6 +199,7 @@ Command line option reference :
  @frelp   - relative path of the file
  @fname   - name of the file
  @fext    - extension of the file
+ @fn8.3   - short name 8.3 of the file
  @fattr   - attributes of the file
  @fdate   - last modified date of the file
  @ftime   - last modified time of the file
@@ -221,46 +224,42 @@ Command line option reference :
  Renames all elements in current directory with the name "testN".
 
  SEARCH FILE /DATE 12/12/2012 /CMD "echo @fpath & copy @qot@fpath@qot test"
- Copies elements modified the 12th of december 2012 into folder "test".
+ Copies elements modified the 12th of december 2012 into directory "test".
 
  SEARCH TEXT "Hello world" /M /CMD "echo @fpath & del @qot@fpath@qot"
  Deletes all files which contain the string "Hello world".
 
  SEARCH COMP test1 test2 /V /CMD "echo @fname"
- Searches for all file names which are both inside the folder "test1" and the
- folder "test2".
+ Searches for all homonymous files of the directories "test1" and "test2".
 
  SEARCH COMP test1 test2 /NAME .bat /T:C /CMD "echo @fdate @ftime @frelp"
  Searches for batch files which have different creation date/time inside the
- two folders "test1" and "test2".
-
+ two directories "test1" and "test2".
+```
 
 --------------------------------------------------------------------------------
 
-Programme SEARCH version 6.0 par Baptiste Thémine
+### SEARCH HELP FR :fr:
 
-Utilitaire pour ligne de commande Windows qui effectue des recherches de fichiers,
-recherches de textes et comparaison de fichiers/répertoires.
-Compatible avec Windows XP, Vista, 7, 8, 8.1, 10 anglais et français.
+**Utilitaire pour ligne de commande Windows qui effectue des recherches de fichiers, recherches de textes et comparaison de fichiers/répertoires.**
+
 Le fichier search.bat peut être placé dans le répertoire "C:\Windows" et exécuté
 sur CMD ou PowerShell.
-
-La syntaxe de cette commande est :
-
-SEARCH HELP					Afficher l'aide
-SEARCH FILE [fichiers...] [options]		Recherche de fichier
-SEARCH TEXT "chaîne" [fichiers...] [options]	Recherche de texte
-SEARCH COMP fichier1 fichier2 [options]		Comparaison de fichiers
-SEARCH ... [/CMD[ONLY] "cmdline"]		Option ligne de commande
-
-Note : L'utilitaire exécute des commandes DIR, FIND, FINDSTR et FC sur l'arborescence
+L'utilitaire exécute des commandes DIR, FIND, FINDSTR et FC sur l'arborescence
 de l'ordinateur en lecture seule par défaut, c'est-à-dire sans qu'aucune altération ou
 suppression de vos données personnelles soit possible.
 La modification de l'option ligne de commande est donc à utiliser avec précaution.
 Seule l'écriture dans un fichier temporaire dans le répertoire indiqué par la variable
 d'environnement %TEMP% est utilisé pour la comparaison de répertoires.
 
-Veuillez trouver ci-dessous l'aide détaillée en français et les exemples d'utilisation :
+```
+La syntaxe de cette commande est :
+
+SEARCH HELP					Afficher l'aide
+SEARCH FILE [fichiers...] [options]		Recherche de fichier
+SEARCH TEXT "chaîne" [fichiers...] [options]	Recherche de texte
+SEARCH COMP fichier1 fichier2 [options]		Comparaison de fichiers
+SEARCH ... [/CMD[ONLY] "cmdline"]		Option ligne de commande
 
 SEARCH FILE [répertoire | fichiers...] [options]
 
@@ -315,7 +314,6 @@ SEARCH FILE [répertoire | fichiers...] [options]
  SEARCH FILE /DATE 12/12/2012-%DATE% /T:C
  Recherche tous les éléments créés depuis le 12 décembre 2012 à aujourd'hui.
 
-
 SEARCH TEXT "chaîne" [répertoire | fichiers...] [options]
 
  Options : [/DIR répertoire] [/NAME fichiers...] [/FIND[STR]] [/B] [/C] [/E]
@@ -369,7 +367,6 @@ SEARCH TEXT "chaîne" [répertoire | fichiers...] [options]
  SEARCH TEXT . /C /M /R
  Affiche le nombre total de lignes non vides contenus dans chaque fichier.
 
-
 SEARCH COMP fichier1 fichier2 [options]
             répertoire1 répertoire2 [options]
 
@@ -417,13 +414,11 @@ SEARCH COMP fichier1 fichier2 [options]
  "test2" et tous leurs sous-répertoires.
 
  SEARCH COMP test1 test2 /V /CMD "echo @fname"
- Recherche tous les noms de fichier présents à la fois dans le répertoire
- "test1" et le répertoire "test2".
+ Recherche tous les fichiers homonymes des répertoires "test1" et "test2".
 
  SEARCH COMP test1 test2 /NAME .bat /T:C /CMD "echo @fdate @ftime @frelp"
  Recherche les fichiers batch présents dans les répertoires "test1" et "test2"
  dont les dates/heures de création sont différentes.
-
 
 Guide de l'option ligne de commande
 
@@ -433,15 +428,16 @@ Guide de l'option ligne de commande
  spécifiée. "cmdline" indique la ligne de commande à exécuter pour chaque
  fichier trouvé par la recherche de fichier ou de texte et permet également de
  définir les critères de comparaison de deux répertoires. Si /CMDONLY est
- spécifié, alors seule la sortie de la ligne de commande est affichée. La ligne
+ spécifié, l'affichage détaillé du rapport de recherche est désactivé. La ligne
  de commande par défaut est "echo @fattr @fdate @ftime @fsize@tab@fpath".
 
- Les variables suivantes peuvent être utilisées dans la chaîne de commandes :
+ Les variables suivantes peuvent être utilisées dans la chaîne de commandes :
  @fpath   - chemin d'accès complet du fichier
  @fshort  - chemin d'accès complet du fichier avec nom court 8.3
  @frelp   - chemin d'accès relatif du fichier
  @fname   - nom du fichier
  @fext    - extension du fichier
+ @fn8.3   - nom court 8.3 du fichier
  @fattr   - attributs du fichier
  @fdate   - date de dernière modification du fichier
  @ftime   - dernière heure de modification du fichier
@@ -469,12 +465,14 @@ Guide de l'option ligne de commande
  Copie les éléments modifiés le 12 décembre 2012 vers le répertoire "test".
 
  SEARCH TEXT "Hello world" /M /CMD "echo @fpath & del @qot@fpath@qot"
- Efface tous les fichiers contenant la chaîne "Hello world".
+ Supprime tous les fichiers contenant la chaîne "Hello world".
 
  SEARCH COMP test1 test2 /V /CMD "echo @fname"
- Recherche tous les noms de fichier présents à la fois dans le répertoire
- "test1" et le répertoire "test2".
+ Recherche tous les fichiers homonymes des répertoires "test1" et "test2".
 
  SEARCH COMP test1 test2 /NAME .bat /T:C /CMD "echo @fdate @ftime @frelp"
  Recherche les fichiers batch présents dans les répertoires "test1" et "test2"
  dont les dates/heures de création sont différentes.
+```
+
+*Designed by Baptiste Thémine*
